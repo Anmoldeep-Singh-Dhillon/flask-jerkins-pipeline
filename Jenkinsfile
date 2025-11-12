@@ -4,7 +4,7 @@ pipeline{
     stages{
         stage('Checkout'){
             steps{
-                git btranch: 'main',url: 'https://github.com/Anmoldeep-Singh-Dhillon/flask-jerkins-pipeline.git'
+                git branch: 'main',url: 'https://github.com/Anmoldeep-Singh-Dhillon/flask-jerkins-pipeline.git'
             }
         }
         stage('Install dependencies'){
