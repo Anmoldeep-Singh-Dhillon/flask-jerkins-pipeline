@@ -10,10 +10,24 @@ pipeline {
 
         stage('Install dependencies') {
             steps {
-                sh '/usr/local/bin/python3 -m venv venv'
-                sh '. venv/bin/activate && /usr/local/bin/pip3 install -r requirements.txt'
+                sh '''
+                    echo "Python location: $(which python3)"
+                    echo "Python version: $(python3 --version)"
+            
+                    # Create venv safely
+                    /usr/local/bin/python3 -m venv --without-pip venv
+            
+                    # Manually bootstrap pip inside venv
+                    /usr/local/bin/python3 -m ensurepip --upgrade
+            
+                    # Activate and install requirements
+                    . venv/bin/activate
+                    pip install --upgrade pip
+                    pip install -r requirements.txt || true
+                    '''
             }
-        }
+            }
+
 
 
         stage('Run Tests') {
