@@ -10,10 +10,11 @@ pipeline {
 
         stage('Install dependencies') {
             steps {
-                sh 'python3 -m venv venv'
-                sh '. venv/bin/activate && pip install -r requirements.txt'
+                sh '/usr/local/bin/python3 -m venv venv'
+                sh '. venv/bin/activate && /usr/local/bin/pip3 install -r requirements.txt'
             }
         }
+
 
         stage('Run Tests') {
             steps {
